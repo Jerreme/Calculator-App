@@ -38,30 +38,45 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2">
 
-        <TextView
+        <HorizontalScrollView
+            android:id="@+id/Hscollview1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="bottom|right"
-            android:paddingEnd="30dp"
+            android:layout_marginEnd="35dp">
 
-            android:text="= 4"
+        <TextView
+            android:id="@+id/equations_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:gravity="center|right"
+
+            android:text="4x4"
             android:textSize="24dp"
             android:textStyle="bold"
 
             />
+        </HorizontalScrollView>
 
-        <TextView
+        <HorizontalScrollView
+            android:id="@+id/Hscollview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:gravity="bottom|right"
-            android:hint="0"
-            android:paddingEnd="25dp"
-            android:paddingBottom="40dp"
-            android:textSize="64sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp">
+
+            <TextView
+                android:id="@+id/result_display"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|right"
+                android:gravity="bottom|right"
+                android:paddingBottom="40dp"
+                android:hint="0"
+                android:textSize="54sp"
 
 
+                />
+        </HorizontalScrollView>
     </LinearLayout>
 
     <LinearLayout
@@ -77,8 +92,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/negative_margin"
+            android:orientation="horizontal"
             android:weightSum="4">
 
 
@@ -89,11 +104,13 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_clear"
 
                 android:text="c"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp"
-                android:textStyle="bold"/>
+                android:textSize="@dimen/btn_textSize"
+                android:textStyle="bold" />
+
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
@@ -101,10 +118,12 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_percent"
 
                 android:text="%"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
+
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
@@ -112,10 +131,12 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_backspace"
 
                 android:text="E"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
+
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
@@ -123,58 +144,62 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_devide"
 
                 android:text="/"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/negative_margin"
+            android:orientation="horizontal"
             android:weightSum="4">
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_7"
 
                 android:paddingTop="10dp"
                 android:text="7"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_8"
 
                 android:paddingTop="10dp"
                 android:text="8"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_9"
 
                 android:paddingTop="10dp"
                 android:text="9"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
@@ -183,58 +208,62 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_multiply"
 
                 android:text="x"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/negative_margin"
+            android:orientation="horizontal"
             android:weightSum="4">
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_4"
 
                 android:paddingTop="10dp"
                 android:text="4"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_5"
 
                 android:paddingTop="10dp"
                 android:text="5"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_6"
 
                 android:paddingTop="10dp"
                 android:text="6"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp"
+                android:textSize="@dimen/btn_textSize"
                 tools:targetApi="n" />
 
             <soup.neumorphism.NeumorphButton
@@ -244,6 +273,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_dot"
 
                 android:text="-"
                 android:textColor="@color/buttonTextCol"
@@ -254,48 +284,51 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/negative_margin"
+            android:orientation="horizontal"
             android:weightSum="4">
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_1"
 
                 android:paddingTop="10dp"
                 android:text="1"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_2"
 
                 android:paddingTop="10dp"
                 android:text="2"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_3"
 
                 android:paddingTop="10dp"
                 android:text="3"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
@@ -307,7 +340,7 @@
 
                 android:text="+"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
         </LinearLayout>
 
@@ -318,43 +351,46 @@
             android:weightSum="4">
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_sign"
 
                 android:paddingTop="10dp"
                 android:text="+/-"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_0"
 
                 android:paddingTop="10dp"
                 android:text="0"
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <Button
+                style="?android:attr/buttonStyleToggle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                style="?android:attr/buttonStyleToggle"
+                android:onClick="clicked_dot"
 
                 android:paddingTop="10dp"
                 android:text="."
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp" />
+                android:textSize="@dimen/btn_textSize" />
 
             <soup.neumorphism.NeumorphButton
                 style="@style/Widget.Neumorph.Button"
@@ -363,11 +399,12 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_equal"
 
                 android:text="="
                 android:textColor="@color/buttonTextCol"
-                android:textSize="28dp"
-                android:textStyle="bold"/>
+                android:textSize="@dimen/btn_textSize"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
