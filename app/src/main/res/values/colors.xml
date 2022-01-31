@@ -17,7 +17,7 @@
     <color name="white">#FFFFFFFF</color>
 
 <!--    my colors-->
-    <color name="my_bg">#f5f5f5</color>
+    <color name="my_bg">#f7f7f7</color>
     <color name="buttonTextCol">@color/black</color>
     <color name="buttonCol">@color/purple_500</color>
 <!--    <color name=""></color>-->

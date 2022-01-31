@@ -25,9 +25,9 @@
 
             android:paddingEnd="25dp"
             android:text="Calculator"
+            android:textColor="@color/buttonTextCol"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/buttonTextCol"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -38,6 +38,18 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="bottom|right"
+            android:paddingEnd="30dp"
+
+            android:text="= 4"
+            android:textSize="24dp"
+            android:textStyle="bold"
+
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -46,23 +58,8 @@
             android:gravity="bottom|right"
             android:hint="0"
             android:paddingEnd="25dp"
-            android:paddingBottom="10dp"
+            android:paddingBottom="40dp"
             android:textSize="64sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom|right"
-            android:layout_gravity="top"
-            android:paddingEnd="25dp"
-            android:paddingBottom="50dp"
-
-            android:text="= 4"
-            android:textSize="24dp"
-            android:textStyle="bold"
-
-            />
-
 
 
     </LinearLayout>
@@ -72,8 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="vertical"
         android:layout_marginBottom="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
 
@@ -81,262 +78,239 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/negative_margin"
             android:weightSum="4">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
-                android:layout_weight="1"
-                android:background="@drawable/buttons_style"
-                android:gravity="center"
-                android:paddingTop="10dp"
 
-                android:text="C"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:textColor="@color/buttonTextCol"
-                />
-            <Button
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+
+                android:text="c"
+                android:textColor="@color/buttonTextCol"
+                android:textSize="28dp"
+                android:textStyle="bold"/>
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
 
                 android:text="%"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
-            <Button
+                android:textSize="28dp" />
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
 
                 android:text="E"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
-            <Button
+                android:textSize="28dp" />
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
 
                 android:text="/"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/negative_margin"
             android:weightSum="4">
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="7"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="8"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="9"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
-            <Button
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
 
                 android:text="x"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/negative_margin"
             android:weightSum="4">
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="4"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="5"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
-                android:layout_weight="1"
-                android:background="@drawable/buttons_style"
-                android:gravity="center"
-                android:paddingTop="10dp"
+                android:textSize="28dp" />
 
-                android:text="6"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/buttonTextCol"
-                />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
+                style="?android:attr/buttonStyleToggle"
+
                 android:paddingTop="10dp"
+                android:text="6"
+                android:textColor="@color/buttonTextCol"
+                android:textSize="28dp"
+                tools:targetApi="n" />
+
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
 
                 android:text="-"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/negative_margin"
             android:weightSum="4">
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="1"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="2"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="3"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
-            <Button
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
 
                 android:text="+"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -346,62 +320,54 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="+/-"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="0"
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
+                style="?android:attr/buttonStyleToggle"
 
+                android:paddingTop="10dp"
                 android:text="."
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp" />
 
-            <Button
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_margin="@dimen/button_margin"
                 android:layout_weight="1"
-                android:background="@drawable/buttons_style"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:paddingTop="10dp"
 
                 android:text="="
-                android:textSize="28dp"
-                android:fontFamily="sans-serif"
                 android:textColor="@color/buttonTextCol"
-                />
+                android:textSize="28dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

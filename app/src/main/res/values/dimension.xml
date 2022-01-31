@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_height">75dp</dimen>
-    <dimen name="button_margin">1dp</dimen>
 
+    <dimen name="button_height">85dp</dimen>
+    <dimen name="button_margin">1dp</dimen>
+    <dimen name="negative_margin">-8dp</dimen>
 </resources>
