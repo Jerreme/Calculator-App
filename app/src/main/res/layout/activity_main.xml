@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
             android:gravity="center|right"
+            android:paddingStart="40dp"
 
             android:text="4x4"
             android:textSize="24dp"
@@ -70,6 +72,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom|right"
                 android:gravity="bottom|right"
+                android:paddingStart="40dp"
                 android:paddingBottom="40dp"
                 android:hint="0"
                 android:textSize="54sp"
@@ -130,10 +133,10 @@
                 android:layout_height="@dimen/button_height"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:gravity="center"
                 android:onClick="clicked_backspace"
+                android:drawableEnd="@drawable/clear_symbol_22px"
+                android:gravity="center"
 
-                android:text="E"
                 android:textColor="@color/buttonTextCol"
                 android:textSize="@dimen/btn_textSize" />
 
@@ -146,7 +149,7 @@
                 android:gravity="center"
                 android:onClick="clicked_devide"
 
-                android:text="/"
+                android:text="÷"
                 android:textColor="@color/buttonTextCol"
                 android:textSize="@dimen/btn_textSize" />
 
@@ -210,7 +213,7 @@
                 android:gravity="center"
                 android:onClick="clicked_multiply"
 
-                android:text="x"
+                android:text="×"
                 android:textColor="@color/buttonTextCol"
                 android:textSize="@dimen/btn_textSize" />
 
@@ -273,7 +276,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:onClick="clicked_dot"
+                android:onClick="clicked_subtract"
 
                 android:text="-"
                 android:textColor="@color/buttonTextCol"
@@ -337,6 +340,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
+                android:onClick="clicked_add"
 
                 android:text="+"
                 android:textColor="@color/buttonTextCol"
@@ -360,7 +364,7 @@
                 android:onClick="clicked_sign"
 
                 android:paddingTop="10dp"
-                android:text="+/-"
+                android:text="±"
                 android:textColor="@color/buttonTextCol"
                 android:textSize="@dimen/btn_textSize" />
 

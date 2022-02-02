@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="button_height">85dp</dimen>
+    <dimen name="button_height">80dp</dimen>
     <dimen name="button_margin">1dp</dimen>
     <dimen name="negative_margin">-8dp</dimen>
     <dimen name="btn_textSize">22dp</dimen>
