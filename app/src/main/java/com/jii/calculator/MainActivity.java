@@ -2,8 +2,10 @@ package com.jii.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String first_val, second_val, result_val;
     String string_val, active_val, temp;
 
+    int prevQuantity, prevSize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,18 @@ public class MainActivity extends AppCompatActivity {
         scrollview = findViewById(R.id.Hscollview);
         titleText = findViewById(R.id.title);
 
+//        resultText.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+//                if (resultText.getWidth() > scrollview.getWidth()) {
+//                    if (resultText.getTextSize() / 2 > 34)
+//                        resultText.setTextSize((int) (resultText.getTextSize() / 2) - 3);
+//                }
+//            }
+//        });
         clear_fields();
     }
+
     private void operatorClicked(char key) {
         if (current_key != key) {
             current_key = key;
@@ -43,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultText.getText().equals("") || Double.parseDouble(active_val) == 0) {
                 if (operatorQueue) {
                     equationText.setText(equationText.getText().toString().replace(current_operator, current_key));
-                    current_operator  = current_key;
+                    current_operator = current_key;
                 } else {
                     first_val = "0";
                 }
@@ -67,18 +80,13 @@ public class MainActivity extends AppCompatActivity {
         active_val = "";
         temp = "";
 
+        prevQuantity = 1;
+        prevSize = 54;
+        resultText.setTextSize(prevSize);
 
         resultText.setText(active_val);
         equationText.setText(first_val + " " + key + " ");
         equationText.setVisibility(View.VISIBLE);
-    }
-
-    private boolean checkDecimal(String val) {
-        double doubleVal = Double.parseDouble(val);
-        if ((long) doubleVal == doubleVal)
-            return false;
-        else
-            return true;
     }
 
     private String reformatResult(double val) {
@@ -94,7 +102,23 @@ public class MainActivity extends AppCompatActivity {
         if (val.startsWith("0") && !string_val.contains("."))
             val = val.replaceFirst("0", "");
 
+        prevQuantity = active_val.length();
+        prevSize = (int) resultText.getTextSize()/2;
+
         active_val = val;
+//        if (resultText.getWidth() > scrollview.getWidth() - 25) {
+//            if (resultText.getTextSize() / 2 > 34)
+//                resultText.setTextSize((int) (resultText.getTextSize() / 2) - 4);
+//        }
+        titleText.setText(prevQuantity + " " + prevSize);
+        if (active_val.length() > 15) {
+            resultText.setTextSize(32);
+        }else if (active_val.length() <= 18 && active_val.length() > 10) {
+            resultText.setTextSize((prevQuantity*prevSize)/active_val.length() + (prevQuantity % 2));
+        }else {
+            resultText.setTextSize(54);
+        }
+
         resultText.setText(active_val);
         scrollview.fullScroll(ScrollView.FOCUS_RIGHT);
     }
@@ -117,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
         string_val = "";
         active_val = "";
         temp = "";
+
+        prevQuantity = 1;
+        prevSize = 54;
+        resultText.setTextSize(prevSize);
 
         resultText.setText(empty);
         equationText.setText(empty);
@@ -228,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void clicked_equal(View view) {
-//        updateResultDisplay(current_key);
         if (current_key != '=' && operatorQueue) {
             if (!resultText.getText().equals("") && Double.parseDouble(active_val) != 0) {
                 second_val = active_val;
@@ -248,16 +275,31 @@ public class MainActivity extends AppCompatActivity {
                     case '×':
                         result_double = fNum * sNum;
                         break;
-                    case  '÷':
+                    case '÷':
                         result_double = fNum / sNum;
                         break;
                     default:
                         Toast.makeText(MainActivity.this, "Error: Invalid Operator", Toast.LENGTH_SHORT).show();
                 }
 
+                prevQuantity = String.valueOf((int) result_double).length();
+                prevSize = (int) resultText.getTextSize()/2;
+
+                equationText.setText(String.format("%s%s = ", equationText.getText(), reformatResult(sNum)));
                 result_val = reformatResult(result_double);
-                titleText.setText(result_val);
-                clear_fields();
+
+                resultText.setText(result_val);
+                active_val = result_val;
+
+                if (active_val.length() > 15) {
+                    resultText.setTextSize(32);
+                }else if (active_val.length() <= 18 && active_val.length() > 10) {
+                    resultText.setTextSize((prevQuantity*prevSize)/active_val.length() + (prevQuantity % 2));
+                }else {
+                    resultText.setTextSize(54);
+                }
+
+                scrollview.fullScroll(ScrollView.FOCUS_RIGHT);
             }
 
         }
