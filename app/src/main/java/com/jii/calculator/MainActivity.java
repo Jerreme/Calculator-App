@@ -2,10 +2,12 @@ package com.jii.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -14,7 +16,8 @@ import android.widget.Toast;
 //Toast.makeText(MainActivity.this,e.toString(), Toast.LENGTH_SHORT).show();
 public class MainActivity extends AppCompatActivity {
     TextView equationText, resultText, titleText;
-    HorizontalScrollView scrollview;
+    HorizontalScrollView resScrollview , equaScrollview;
+    Button backspace;
 
     public static double result_double;
     public static long result_long;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     String string_val, active_val, temp;
 
     int prevQuantity, prevSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,23 +38,67 @@ public class MainActivity extends AppCompatActivity {
 
         equationText = findViewById(R.id.equations_display);
         resultText = findViewById(R.id.result_display);
-        scrollview = findViewById(R.id.Hscollview);
+        resScrollview = findViewById(R.id.Hsrcollview);
+        equaScrollview = findViewById(R.id.topScrollview);
         titleText = findViewById(R.id.title);
+        backspace = findViewById(R.id.backspaceBtn);
 
-//        resultText.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-//            @Override
-//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//                if (resultText.getWidth() > scrollview.getWidth()) {
-//                    if (resultText.getTextSize() / 2 > 34)
-//                        resultText.setTextSize((int) (resultText.getTextSize() / 2) - 3);
-//                }
-//            }
-//        });
+
+        backspaceHold();
+        backspace.isPressed();
         clear_fields();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void backspaceHold() {
+        backspace.setOnTouchListener(new View.OnTouchListener() {
+
+            private Handler mHandler;
+
+            @Override public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (mHandler != null) return true;
+                        mHandler = new Handler();
+                        mHandler.postDelayed(mAction, 500);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (mHandler == null) return true;
+                        mHandler.removeCallbacks(mAction);
+                        mHandler = null;
+                        break;
+                }
+                return false;
+            }
+
+            Runnable mAction = new Runnable() {
+                @Override public void run() {
+                    clicked_backspace(null);
+                    mHandler.postDelayed(this, 80);
+                }
+            };
+
+        });
+    }
+    private void digitsClicked(char val) {
+        if (equationText.getText().toString().contains("=")) {
+            string_val += Character.toString(val);
+            equationText.setText("");
+            equationText.setVisibility(View.INVISIBLE);
+            updateResultDisplay(string_val);
+        } else {
+            string_val += Character.toString(val);
+            updateResultDisplay(string_val);
+        }
+    }
+
     private void operatorClicked(char key) {
-        if (current_key != key) {
+        if (!active_val.equals("") && current_key != 'c' && !equationText.getText().toString().contains("=")) {
+            current_key = key;
+            calculateResult(current_operator);
+            prepare2ndVal(key);
+            current_operator = current_key;
+        } else if (active_val.equals("")) {
             current_key = key;
 
             if (resultText.getText().equals("") || Double.parseDouble(active_val) == 0) {
@@ -60,9 +108,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     first_val = "0";
                 }
-            } else {
-                prepare2ndVal(current_key);
             }
+        } else {
+            current_key = key;
+            prepare2ndVal(current_key);
         }
     }
 
@@ -87,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         resultText.setText(active_val);
         equationText.setText(first_val + " " + key + " ");
         equationText.setVisibility(View.VISIBLE);
+        equaScrollview.fullScroll(ScrollView.FOCUS_RIGHT);
     }
 
     private String reformatResult(double val) {
@@ -103,24 +153,19 @@ public class MainActivity extends AppCompatActivity {
             val = val.replaceFirst("0", "");
 
         prevQuantity = active_val.length();
-        prevSize = (int) resultText.getTextSize()/2;
-
+        prevSize = (int) resultText.getTextSize() / 2;
         active_val = val;
-//        if (resultText.getWidth() > scrollview.getWidth() - 25) {
-//            if (resultText.getTextSize() / 2 > 34)
-//                resultText.setTextSize((int) (resultText.getTextSize() / 2) - 4);
-//        }
-        titleText.setText(prevQuantity + " " + prevSize);
+
         if (active_val.length() > 15) {
             resultText.setTextSize(32);
-        }else if (active_val.length() <= 18 && active_val.length() > 10) {
-            resultText.setTextSize((prevQuantity*prevSize)/active_val.length() + (prevQuantity % 2));
-        }else {
+        } else if (active_val.length() <= 18 && active_val.length() > 10) {
+            resultText.setTextSize((prevQuantity * prevSize) / active_val.length() + (prevQuantity % 2));
+        } else {
             resultText.setTextSize(54);
         }
 
         resultText.setText(active_val);
-        scrollview.fullScroll(ScrollView.FOCUS_RIGHT);
+        resScrollview.fullScroll(ScrollView.FOCUS_RIGHT);
     }
 
     private void clear_fields() {
@@ -149,75 +194,66 @@ public class MainActivity extends AppCompatActivity {
         resultText.setText(empty);
         equationText.setText(empty);
         equationText.setVisibility(View.INVISIBLE);
-        scrollview.fullScroll(ScrollView.FOCUS_RIGHT);
+        equaScrollview.fullScroll(ScrollView.FOCUS_RIGHT);
+        resScrollview.fullScroll(ScrollView.FOCUS_RIGHT);
     }
 
     public void clicked_9(View view) {
         current_num = '9';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_8(View view) {
         current_num = '8';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_7(View view) {
         current_num = '7';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_6(View view) {
         current_num = '6';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_5(View view) {
         current_num = '5';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_4(View view) {
         current_num = '4';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_3(View view) {
         current_num = '3';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_2(View view) {
         current_num = '2';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_1(View view) {
         current_num = '1';
-        string_val += Character.toString(current_num);
-        updateResultDisplay(string_val);
+        digitsClicked(current_num);
     }
 
     public void clicked_0(View view) {
         current_num = '0';
         if (!resultText.getText().equals("") && !resultText.getText().equals("0")) {
-            string_val += Character.toString(current_num);
-            updateResultDisplay(string_val);
+            digitsClicked(current_num);
         }
     }
 
     public void clicked_sign(View view) {
         current_key = 's';
         if (!resultText.getText().equals("")) {
-            result_double = Double.parseDouble(string_val);
+            result_double = Double.parseDouble(active_val);
             if (result_double != 0.0) {
                 result_double *= -1;
                 string_val = reformatResult(result_double);
@@ -258,56 +294,67 @@ public class MainActivity extends AppCompatActivity {
     public void clicked_equal(View view) {
         if (current_key != '=' && operatorQueue) {
             if (!resultText.getText().equals("") && Double.parseDouble(active_val) != 0) {
-                second_val = active_val;
-                operatorQueue = false;
                 current_key = '=';
-
-                double fNum = Double.parseDouble(first_val);
-                double sNum = Double.parseDouble(second_val);
-
-                switch (current_operator) {
-                    case '+':
-                        result_double = fNum + sNum;
-                        break;
-                    case '-':
-                        result_double = fNum - sNum;
-                        break;
-                    case '×':
-                        result_double = fNum * sNum;
-                        break;
-                    case '÷':
-                        result_double = fNum / sNum;
-                        break;
-                    default:
-                        Toast.makeText(MainActivity.this, "Error: Invalid Operator", Toast.LENGTH_SHORT).show();
-                }
-
-                prevQuantity = String.valueOf((int) result_double).length();
-                prevSize = (int) resultText.getTextSize()/2;
-
-                equationText.setText(String.format("%s%s = ", equationText.getText(), reformatResult(sNum)));
-                result_val = reformatResult(result_double);
-
-                resultText.setText(result_val);
-                active_val = result_val;
-
-                if (active_val.length() > 15) {
-                    resultText.setTextSize(32);
-                }else if (active_val.length() <= 18 && active_val.length() > 10) {
-                    resultText.setTextSize((prevQuantity*prevSize)/active_val.length() + (prevQuantity % 2));
-                }else {
-                    resultText.setTextSize(54);
-                }
-
-                scrollview.fullScroll(ScrollView.FOCUS_RIGHT);
+                calculateResult(current_operator);
             }
-
         }
     }
 
+    private void calculateResult(char operator) {
+        second_val = active_val;
+        operatorQueue = false;
+
+        double fNum = Double.parseDouble(first_val);
+        double sNum = Double.parseDouble(second_val);
+
+        switch (operator) {
+            case '+':
+                result_double = fNum + sNum;
+                break;
+            case '-':
+                result_double = fNum - sNum;
+                break;
+            case '×':
+                result_double = fNum * sNum;
+                break;
+            case '÷':
+                result_double = fNum / sNum;
+                break;
+            default:
+                Toast.makeText(MainActivity.this, "Error: Invalid Operator", Toast.LENGTH_SHORT).show();
+        }
+
+        prevQuantity = String.valueOf((int) result_double).length();
+        prevSize = (int) resultText.getTextSize() / 2;
+
+        equationText.setText(String.format("%s%s = ", equationText.getText(), reformatResult(sNum)));
+        result_val = reformatResult(result_double);
+
+        if (active_val.length() > 15) {
+            resultText.setTextSize(32);
+        } else if (active_val.length() <= 18 && active_val.length() > 10) {
+            resultText.setTextSize((prevQuantity * prevSize) / active_val.length() + (prevQuantity % 2));
+        } else {
+            resultText.setTextSize(54);
+        }
+
+        resultText.setText(result_val);
+        active_val = result_val;
+        first_val = active_val;
+        string_val = "";
+
+        resScrollview.fullScroll(ScrollView.FOCUS_RIGHT);
+    }
+
     public void clicked_backspace(View view) {
-        current_key = 'b';
-//        updateResultDisplay(current_key);
+        temp = resultText.getText().toString();
+        if(!temp.equals("")) {
+            string_val = "";
+            for(int i=0; i<temp.length()-1; i++) {
+                string_val += temp.charAt(i);
+            }
+            updateResultDisplay(string_val);
+        }
     }
 
     public void clicked_percent(View view) {

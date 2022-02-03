@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jiide/Documents/AndroidStudio/Calculator App/app/src/main/res/drawable/buttons_style.xml" value="0.21614583333333334" />
-        <entry key="..\:/Users/jiide/Documents/AndroidStudio/Calculator App/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/jiide/Documents/AndroidStudio/Calculator App/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/jiide/Documents/AndroidStudio/Calculator App/app/src/main/res/layout/icon_origin.xml" value="0.18" />
+        <entry key="..\:/Users/jiide/Documents/AndroidStudio/Calculator App/app/src/main/res/layout/splash_screen.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/jiide/Documents/AndroidStudio/Calculator App/app/src/main/res/mipmap-anydpi-v26/my_calculator_icon.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -13,5 +16,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.18" />
+      </ProjectState>
+    </option>
   </component>
 </project>
