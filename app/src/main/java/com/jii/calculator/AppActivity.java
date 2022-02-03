@@ -16,7 +16,7 @@ import android.widget.Toast;
 //Toast.makeText(MainActivity.this,e.toString(), Toast.LENGTH_SHORT).show();
 public class AppActivity extends AppCompatActivity {
     TextView equationText, resultText, titleText;
-    HorizontalScrollView resScrollview , equaScrollview;
+    HorizontalScrollView resScrollview, equaScrollview;
     Button backspace;
 
     public static double result_double;
@@ -55,8 +55,9 @@ public class AppActivity extends AppCompatActivity {
 
             private Handler mHandler;
 
-            @Override public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if (mHandler != null) return true;
                         mHandler = new Handler();
@@ -72,7 +73,8 @@ public class AppActivity extends AppCompatActivity {
             }
 
             Runnable mAction = new Runnable() {
-                @Override public void run() {
+                @Override
+                public void run() {
                     clicked_backspace(null);
                     mHandler.postDelayed(this, 80);
                 }
@@ -80,6 +82,7 @@ public class AppActivity extends AppCompatActivity {
 
         });
     }
+
     private void digitsClicked(char val) {
         if (equationText.getText().toString().contains("=")) {
             string_val += Character.toString(val);
@@ -93,7 +96,7 @@ public class AppActivity extends AppCompatActivity {
     }
 
     private void operatorClicked(char key) {
-        if (!active_val.equals("") && current_key != 'c' && !equationText.getText().toString().contains("=")) {
+        if (!active_val.equals("") && current_key != 'c' && !equationText.getText().toString().contains("=") && current_operator != 'c') {
             current_key = key;
             calculateResult(current_operator);
             prepare2ndVal(key);
@@ -178,6 +181,7 @@ public class AppActivity extends AppCompatActivity {
         prev_num = '0';
         current_num = '0';
         current_key = 'c';
+        current_operator = 'c';
 
         first_val = "0";
         second_val = "0";
@@ -348,9 +352,9 @@ public class AppActivity extends AppCompatActivity {
 
     public void clicked_backspace(View view) {
         temp = resultText.getText().toString();
-        if(!temp.equals("")) {
+        if (!temp.equals("")) {
             string_val = "";
-            for(int i=0; i<temp.length()-1; i++) {
+            for (int i = 0; i < temp.length() - 1; i++) {
                 string_val += temp.charAt(i);
             }
             updateResultDisplay(string_val);
